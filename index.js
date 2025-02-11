@@ -12,7 +12,7 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: "https://mellow-dev.webflow.io/",
+    origin: "https://mellow-dev.webflow.io",
   })
 );
 app.use(express.json());
