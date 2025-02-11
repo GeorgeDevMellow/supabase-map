@@ -21,6 +21,18 @@ app.get("/", (req, res) => {
   res.send("Server is working, go to /api/data for getting data.");
 });
 
+app.get("/ping-supabase", async (req, res) => {
+  const supabaseUrl = process.env.SUPABASE_URL;
+
+  try {
+    const response = await fetch(supabaseUrl);
+    res.status(response.status).send("Supabase доступен!");
+  } catch (error) {
+    console.error("Ошибка подключения к Supabase:", error);
+    res.status(500).send("Нет доступа к Supabase");
+  }
+});
+
 app.get("/api/data", async (req, res) => {
   const supabaseUrl = process.env.SUPABASE_URL;
   const apiKey = process.env.SUPABASE_API_KEY;
