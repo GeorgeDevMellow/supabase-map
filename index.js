@@ -12,10 +12,14 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: "https://mellow-dev.webflow.io/for-business/test-map",
+    origin: "https://mellow-dev.webflow.io/",
   })
 );
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Server is working, go to /api/data for getting data.");
+});
 
 app.get("/api/data", async (req, res) => {
   const supabaseUrl = process.env.SUPABASE_URL;
