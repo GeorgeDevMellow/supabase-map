@@ -5,32 +5,20 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const app = express(); // main app
+const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: "https://mellow-dev.webflow.io",
+    origin: ["https://mellow-dev.webflow.io", "https://www.mellow.io"],
   })
 );
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Server is working, go to /api/data for getting data.");
-});
-
-app.get("/ping-supabase", async (req, res) => {
-  const supabaseUrl = process.env.SUPABASE_URL;
-
-  try {
-    const response = await fetch(supabaseUrl);
-    res.status(response.status).send("Supabase доступен!");
-  } catch (error) {
-    console.error("Ошибка подключения к Supabase:", error);
-    res.status(500).send("Нет доступа к Supabase");
-  }
 });
 
 app.get("/api/data", async (req, res) => {
